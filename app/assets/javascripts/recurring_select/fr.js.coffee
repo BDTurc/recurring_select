@@ -1,5 +1,5 @@
 $.fn.recurring_select.texts = {
-  locale_iso_code: "fr"
+  locale_iso_code: "en"
   repeat: "Récurrence"
   last_day: "Dernier jour"
   frequency: "Fréquence"
