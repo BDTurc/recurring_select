@@ -16,8 +16,6 @@ class RecurringSelectMiddleware
 
       if params and params[:rule_type]
         rule = RecurringSelect.dirty_hash_to_rule(params)
-        puts rule
-        puts rule.to_s
         [200, {"Content-Type" => "text/html"}, [rule.to_s]]
       else
         [200, {"Content-Type" => "text/html"}, [""]]
