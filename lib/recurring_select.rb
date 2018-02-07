@@ -84,9 +84,10 @@ module RecurringSelect
       #  {time: Thu, 04 Sep 2014 06:59:59 +0000, zone: "Pacific Time (US & Canada)"}
       # So don't try to DateTime.parse the hash.  IceCube::TimeUtil will deserialize this for us.
       if (until_param = params[:until])
-        Rails.logger.error(until_param)
         if until_param.is_a?(String)
-          Time.zone = 'Eastern Time (US & Canada)'
+          Rails.logger.error(until_param)
+          parts = until_param.split("-")
+          until_param = "#{parts[0]}-#{parts[2]}-#{parts[1]}"
           Rails.logger.error(until_param)
           Rails.logger.error(Time.zone.parse(until_param).change(hour: 23, min: 59, sec: 59))
           # Set to 23:59:59 (in current TZ) to encompass all events on until day
