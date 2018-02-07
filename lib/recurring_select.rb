@@ -5,7 +5,6 @@ module RecurringSelect
 
   def self.dirty_hash_to_rule(params)
     if params.is_a? IceCube::Rule
-      puts "YOOOOOOOO I AM A RULE"
       params
     else
       params = JSON.parse(params, quirks_mode: true) if params.is_a?(String)
@@ -85,9 +84,10 @@ module RecurringSelect
       #  {time: Thu, 04 Sep 2014 06:59:59 +0000, zone: "Pacific Time (US & Canada)"}
       # So don't try to DateTime.parse the hash.  IceCube::TimeUtil will deserialize this for us.
       if (until_param = params[:until])
-        Rails.logger.error("YOOOOOOOOO")
         Rails.logger.error(until_param)
         if until_param.is_a?(String)
+          Rails.logger.error(until_param)
+          Rails.logger.error(Time.zone.parse(until_param).change(hour: 23, min: 59, sec: 59))
           # Set to 23:59:59 (in current TZ) to encompass all events on until day
           params[:until] = Time.zone.parse(until_param).change(hour: 23, min: 59, sec: 59)
         elsif until_param.is_a?(Hash) # ex: {time: Thu, 28 Aug 2014 06:59:590000, zone: "Pacific Time (US & Canada)"}
