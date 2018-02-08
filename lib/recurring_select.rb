@@ -87,7 +87,7 @@ module RecurringSelect
         if until_param.is_a?(String)
           Rails.logger.error(until_param)
           parts = until_param.split("/")
-          until_param = "#{parts[0]}-#{parts[2]}-#{parts[1]}"
+          until_param = "#{parts[1]}/#{parts[0]}/#{parts[2]}"
           Rails.logger.error(until_param)
           Rails.logger.error(Time.zone.parse(until_param).change(hour: 23, min: 59, sec: 59))
           # Set to 23:59:59 (in current TZ) to encompass all events on until day
